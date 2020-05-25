@@ -1,0 +1,57 @@
+conky.config = {
+	background = false,
+	use_xft = true,
+	font = 'Ubuntu:size=8',
+	xftalpha = 1,
+	override_utf8_locale = true,
+	update_interval = 1,
+	total_run_times = 0,
+	own_window = true,
+	own_window_type = 'desktop',
+	own_window_transparent = true,
+--own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+	double_buffer = true,
+	minimum_width = 250, 
+	minimum_height = 5,
+--maximum_width 400
+	draw_shades = false,
+	draw_outline = false,
+	draw_borders = false,
+	draw_graph_borders = false,
+	default_color = 'gray',
+	default_shade_color = 'red',
+	default_outline_color = 'green',
+	alignment = 'top_left',
+	gap_x = 10,
+	gap_y = 10,
+	no_buffers = true,
+	text_buffer_size = 6144,
+	uppercase = false,
+	cpu_avg_samples = 2,
+	net_avg_samples = 1,
+	use_spacer = 'none',
+
+};
+
+conky.text = [[
+${font Ubuntu:size=50}${color Tan1}${time %H:%M} ${color Ivory}${time %A %e %B}${font}
+${font Ubuntu:size=15}
+${color Tan1}${hr 3,5}${color}
+${font Ubuntu:size=10}
+#just cant get this to work ${font Ubuntu:size=10}${execi 30 /home/pi/wttr.sh}
+${font Ubuntu:size=20}${color Tan1}Temp: ${execi 30 cat /home/pi/weather.txt | awk '{print $6}'}${font Ubuntu:size=15}${color Ivory} Wind: ${execi 30 cat /home/pi/weather.txt | awk '{print $2}'} mph
+${font Ubuntu:size=10}
+${font Ubuntu:size=25}${color Tan1}Local Forecast ${execi 30 cat /home/pi/weather.txt | awk '{ for (i=9; i<=NF; i++) printf("%s ",$i) }END{ print"" }'}${font}
+${font Ubuntu:size=10}
+${color Tan1}${hr 3,5}${color}
+${font Ubuntu:size=10}
+${font Ubuntu:size=25}${color D8D8D8}${execi 30 cat /home/pi/fore1.txt}
+
+${font Ubuntu:size=25}${color A5A5A5}${execi 30 cat /home/pi/fore2.txt}
+
+${font Ubuntu:size=25}${color 808080}${execi 30 cat /home/pi/fore3.txt}
+${font Ubuntu:size=10}
+${color 808080}${hr 3,5}${color}
+${font Ubuntu:size=10}
+${font Ubuntu:size=20}${color D8D8D8}${execi 30 /usr/local/bin/motivate | ansi2txt | fmt -w 75}
+]];
